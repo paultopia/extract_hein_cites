@@ -1,6 +1,8 @@
 import sys
+
+import rispy
+
 from PyPDF2 import PdfFileReader
-# from collections import OrderedDict
 
 try:
     to_parse = sys.argv[1]
@@ -47,7 +49,18 @@ def find_pages():
 def find_year():
     return bluebook.strip().split(' ')[-1][1:-2]
     
+def to_ris():
+    first, last = find_pages()
+    print(first)
+    out = {'type_of_reference': 'JOUR',
+           'first_authors': find_authors(),
+           'start_page': first,
+           'end_page': last,
+           'year': find_year()}
+    return rispy.dumps([out])
 
-print(find_authors())
-print(find_pages())
-print(find_year())
+print(to_ris())
+
+# print(find_authors())
+# print(find_pages())
+# print(find_year())
