@@ -50,12 +50,12 @@ def find_year():
     return bluebook.strip().split(' ')[-1][1:-2]
     
 def to_ris():
-    first, last = find_pages()
+    pages = find_pages()
     print(first)
     out = {'type_of_reference': 'JOUR',
            'first_authors': find_authors(),
-           'start_page': first,
-           'end_page': last,
+           'start_page': pages['first_page'],
+           'end_page': pages['last_'],
            'year': find_year()}
     return rispy.dumps([out])
 
